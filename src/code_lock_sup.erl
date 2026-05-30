@@ -23,6 +23,12 @@ init([]) ->
         intensity => 0,
         period => 1
     },
-    ChildSpecs = [],
+    ChildSpecs = [#{id => code_lock,
+		    start => {code_lock, start_link, [[1,1,1], "L"]},
+		    restart => permanent,
+		    shutdown => 5000,
+		    type => worker,
+		    modules => [code_lock]}],
+
     {ok, {SupFlags, ChildSpecs}}.
 
